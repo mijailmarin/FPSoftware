@@ -1,0 +1,50 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+CREATE TABLE `usuarios` (
+  `id` int(50) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `privilegio` smallint(1) NOT NULL,
+  `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `token` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `sorteos` (
+  `id` int(50) NOT NULL,
+  `uid` int(50) NOT NULL,
+  `titulo` varchar(100) NOT NULL,
+  `participantes` int(50) NOT NULL,
+  `ganador` int(50) NOT NULL,
+  `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `sorteos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `uid` (`uid`);
+
+ALTER TABLE `usuarios`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+ALTER TABLE `sorteos`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `sorteos`
+  ADD CONSTRAINT `fk_uid` FOREIGN KEY (`uid`) REFERENCES `usuarios` (`id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

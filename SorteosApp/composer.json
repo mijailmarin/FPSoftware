@@ -1,0 +1,25 @@
+{
+    "name": "khanakat/upao",
+    "description": "Proyecto para el curso de ingenieria de software",
+    "authors": [
+        {
+            "name": "FernandoCalmet",
+            "email": "fercalmet@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^3.12",
+        "monolog/monolog": "^1.24",
+        "slim/php-view": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "classes\\": "app/classes/",
+            "models\\": "app/models/",
+            "controllers\\": "app/controllers/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.1"
+    }
+}
